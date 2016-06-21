@@ -5,12 +5,6 @@ import time
 import logging
 log = logging.getLogger(__name__)
 
-with open("albums.json", 'r') as f:
-    albums = json.load(f)
-
-api = Mobileclient()
-api.login('vik.paruchuri@gmail.com', settings.GOOGLE_PASSWORD, Mobileclient.FROM_MAC_ADDRESS)
-
 def import_album(album):
     name = album["name"]
     artist = album["artists"][0]["name"]
@@ -33,4 +27,11 @@ def import_all_albums(albums):
             log.exception("Error")
         time.sleep(2)
 
-import_all_albums(albums)
+if __name__ == "__main__":
+    with open("albums.json", 'r') as f:
+        albums = json.load(f)
+
+    api = Mobileclient()
+    api.login(settings.GOOGLE_EMAIL, settings.GOOGLE_PASSWORD, Mobileclient.FROM_MAC_ADDRESS)
+
+    import_all_albums(albums)

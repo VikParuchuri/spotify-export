@@ -24,6 +24,7 @@ def album_getter():
         time.sleep(1)
     return albums
 
-albums = album_getter()
-with open("albums.json", 'w+') as f:
-    json.dump(albums, f)
+if __name__ == "__main__":
+    albums = album_getter()
+    with open("albums.json", 'w+') as f:
+        json.dump(albums, f)
